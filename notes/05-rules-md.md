@@ -105,3 +105,83 @@ RULES.md                     # 31 строка: индекс для людей �
 ## Теги
 
 #vibecoding #ClaudeCode #context-engineering #rules #prompting
+
+---
+
+## Twitter thread
+
+**1/**
+
+Remember Leonard from Memento?
+
+Tattoos = what you need always. Polaroids = what you need for the situation.
+
+My AI gotchas file grew to 1,407 lines. Then I split it the same way. 🧵
+
+**2/**
+
+The AI forgets everything after the chat.
+
+Lessons have to live in files — loaded automatically, and only when they're needed.
+
+That's project memory. Not a note you hope it rereads.
+
+**3/**
+
+Everything loaded costs tokens. Used or not.
+
+Always-on → keep it small. Facts, invariants, code style.
+
+On demand → can grow forever. Component gotchas load only when you touch that component.
+
+**4/ Two kinds of rules**
+
+Claude Code rules live in `.claude/rules/`:
+
+**unscoped** — no `paths`. Loads every session, like `CLAUDE.md`. Code style, invariants.
+
+**path-scoped** — has `paths:`. Loads only when you open a matching file. This is why I migrated.
+
+**5/**
+
+A path-scoped rule is a short header listing files — then the gotcha:
+
+“In this component do X, or Y breaks.”
+
+Not “write pretty code.” No specifics → it doesn’t belong.
+
+**6/**
+
+This beats “please read RULES.md” for three reasons: the right slice, it loads when you open a file, and — the real one — compaction.
+
+After a long session is compressed, native rules come back.
+
+A manually read file dies in the summary and never returns.
+
+**7/**
+
+Before: 1,407 lines, loaded whole, every task. ~85% was tied to components. I split.
+
+Always-on: 228. Touch one component: +50. Analysis, no code: nothing extra.
+
+Worst case: 643 — for the one task that needs them.
+
+**8/**
+
+What surprised me: attach a theme to *files*, not folders.
+
+A fonts rule lived in nine files across four folders. Hang it on those directories and you load it for a pile of files fonts don’t care about.
+
+**9/**
+
+Don’t keep one kind of knowledge in two homes. unscoped and `CLAUDE.md` cost the same tokens — put it in `.claude/rules/` so you can add `paths:` later.
+
+And write the gotcha down when you hit it. Didn’t write — you fix the same thing a third time.
+
+**10/**
+
+I didn’t guess the split. I asked the AI to count. ~85% could be path-scoped. That settled it.
+
+It also proposed a wrong layout. I said no.
+
+Tattoos for what’s always true. Polaroids for the situation. Don’t pocket the whole stack every morning.
